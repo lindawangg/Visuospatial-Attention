@@ -1,4 +1,5 @@
 import nengo 
+import numpy as np
 
 model = nengo.Network()
 
@@ -13,19 +14,17 @@ with model:
     signal = nengo.Ensemble(n_neurons=100,dimensions=3)
     nengo.Connection(stim_signal,signal)
     
-    intermediate = nengo.Ensemble(n_neurons=100, dimensions=6)
-    nengo.Connection(control, intermediate[:3])
-    nengo.Connection(signal, intermediate[3:])
+    intermediate = nengo.Ensemble(n_neurons=100, dimensions=4)
+    nengo.Connection(control[:2], intermediate[:2])
+    nengo.Connection(signal[:2], intermediate[2:])
     
     # TO-DO: change this placeholder function 
     # Want: depending on the location of the signal in the
     # receptive field, response will differ
     # This depends on sigma_att
     def response_func(x):
-        if x[2] > x[3]:
-            return x[2]*x[3]
-        else:
-            return 0
+        sigma_att = 1
+        return np.exp(-(x[0]-x[2])**2/(2*sigma_att**2))*np.exp(-(x[1]-x[3])**2/(2*sigma_att**2))
     response = nengo.Ensemble(n_neurons=100, dimensions=1)
     nengo.Connection(intermediate, response, function=response_func)
     
