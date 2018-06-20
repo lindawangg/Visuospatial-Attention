@@ -1,10 +1,15 @@
-# Visuospatial-Attention
-SYDE556 Project
+# Response of Selective Attention in Middle Temporal Area
 
-## How you can attend to different parts of an image without moving your eyes?
-For the final project, I designed a model where control neurons are used to attend to different parts of an image without moving the eyes. When looking at an image, attention isn’t focused on the whole image, but parts of it. For controlling which parts of an image will be attended, control neurons will be used to control center of the receptive field, similar to Bobier et al. Mechanistic Model of Selective Attention in Spiking Neurons [1]. 
+The primary visual cortex processes a large amount of visual information, however, due to its large receptive fields, when multiple stimuli fall within one receptive field, there are computational problems. To solve this problem, the visual system uses selective attention, which allocates resources to a specific spatial location, to attend to one of the stimuli in the receptive field. During this process, the center and width of the attending receptive field change. The model presented in the paper, which is extended and altered from Bobier et al., simulates the selective attention between the primary visual cortex, V1, and middle temporal (MT) area. The responses of the MT columns, which encode the target stimulus, are compared to the results of an experiment conducted by Womelsdorf et al. on the receptive field shift and shrinkage in macaque MT area from selective attention. Based on the results, the responses in the MT area are similar to the Gaussian shaped receptive fields found in the experiment. As well, the responses of the MT columns are also measured for accuracy of representing the target visual stimulus and is found to represent the stimulus with a root mean squared error around 0.17 to 0.18. The paper also explores varying model parameters, such as the membrane time constant and maximum firing rates, and how those affect the measurement. This model is a start to modeling the responses of selective attention, however there are still improvements that can be made to better compare with the experiment, produce more accurate responses and incorporate more biologically plausible features. 
 
-References:
-1. Bruce Bobier, Terrence C Stewart, and Chris Eliasmith. A unifying mechanistic model of selective attention in spiking neurons. PLoS computational biology, 10(6):e1003577, June 2014. URL: http://dx.plos.org/10.1371/journal.pcbi.1003577, doi:10.1371/journal.pcbi.1003577.
-2. Womelsdorf T, Anton-Erxleben K, Treue S (2008) Receptive field shift and shrinkage in macaque middle temporal area through attentional gain modulation. Journal of Neuroscience 28: 8934–8944.
-http://www.jneurosci.org/content/jneuro/28/36/8934.full.pdf 
+Check out the paper [here](selective-attention.pdf)
+
+To run the simulation:
+- Install nengo 
+```python
+pip install nengo nengo-gui 
+```
+- Then run 
+```python
+nengo selective-attention.py
+```
